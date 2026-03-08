@@ -17,45 +17,45 @@ export const NAV_ITEMS: NavItem[] = [
 export const FACULTY_MEMBERS: FacultyMember[] = [
   {
     id: 1,
-    name: "Mr. John Doe",
+    name: "Mr. *********",
     role: "Headteacher",
-    bio: "With over 20 years of experience in education administration, Mr. Doe leads Fairway High with a vision for holistic excellence.",
-    image: "https://ui-avatars.com/api/?name=John+Doe&background=0ea5e9&color=fff&size=200"
+    bio: "With over 20 years of experience in education administration, Mr. ********* leads Fairway High with a vision for holistic excellence.",
+    image: "https://ui-avatars.com/api/?name=Head+Teacher&background=0ea5e9&color=fff&size=200"
   },
   {
     id: 2,
-    name: "Ms. Jane Smith",
+    name: "Ms. *********",
     role: "Deputy Headteacher (Academics)",
-    bio: "Ms. Smith ensures our curriculum is rigorous and up-to-date, fostering an environment of academic achievement.",
-    image: "https://ui-avatars.com/api/?name=Jane+Smith&background=f59e0b&color=fff&size=200"
+    bio: "Ms. ********* ensures our curriculum is rigorous and up-to-date, fostering an environment of academic achievement.",
+    image: "https://ui-avatars.com/api/?name=Deputy+Head&background=f59e0b&color=fff&size=200"
   },
   {
     id: 3,
-    name: "Mr. David Kato",
+    name: "Mr. *********",
     role: "Head of Sciences",
-    bio: "Passionate about STEM, Mr. Kato oversees our science laboratories and encourages practical learning.",
-    image: "https://ui-avatars.com/api/?name=David+Kato&background=10b981&color=fff&size=200"
+    bio: "Passionate about STEM, Mr. ********* oversees our science laboratories and encourages practical learning.",
+    image: "https://ui-avatars.com/api/?name=Head+Science&background=10b981&color=fff&size=200"
   },
   {
     id: 4,
-    name: "Mrs. Sarah Nambi",
+    name: "Mrs. *********",
     role: "Head of Humanities",
-    bio: "Mrs. Nambi inspires students to think critically about history, literature, and society.",
-    image: "https://ui-avatars.com/api/?name=Sarah+Nambi&background=8b5cf6&color=fff&size=200"
+    bio: "Mrs. ********* inspires students to think critically about history, literature, and society.",
+    image: "https://ui-avatars.com/api/?name=Head+Humanities&background=8b5cf6&color=fff&size=200"
   },
   {
     id: 5,
-    name: "Coach Michael O.",
+    name: "Coach *********",
     role: "Sports Director",
-    bio: "Coach Michael leads our sports teams to victory and promotes physical fitness among all students.",
-    image: "https://ui-avatars.com/api/?name=Michael+O&background=ef4444&color=fff&size=200"
+    bio: "Coach ********* leads our sports teams to victory and promotes physical fitness among all students.",
+    image: "https://ui-avatars.com/api/?name=Sports+Director&background=ef4444&color=fff&size=200"
   },
   {
     id: 6,
-    name: "Ms. Grace A.",
+    name: "Ms. *********",
     role: "School Bursar",
-    bio: "Ms. Grace manages the school's finances with transparency and efficiency, always ready to assist parents.",
-    image: "https://ui-avatars.com/api/?name=Grace+A&background=6366f1&color=fff&size=200"
+    bio: "Ms. ********* manages the school's finances with transparency and efficiency, always ready to assist parents.",
+    image: "https://ui-avatars.com/api/?name=School+Bursar&background=6366f1&color=fff&size=200"
   }
 ];
 

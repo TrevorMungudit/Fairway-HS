@@ -31,33 +31,35 @@ const FloatingDock: React.FC<FloatingDockProps> = ({ currentView, setView }) => 
   );
 
   return (
-    <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-50">
-      <div className="flex items-center gap-2 bg-brand-black/90 backdrop-blur-xl p-2 rounded-full shadow-2xl border border-white/10">
+    <div className="absolute bottom-8 md:bottom-10 left-1/2 transform -translate-x-1/2 z-[100] w-max max-w-[90vw]">
+      <div className="flex items-center gap-2 bg-brand-black/95 backdrop-blur-xl p-3 rounded-full shadow-2xl border border-white/20 ring-1 ring-black/5">
         {mainNavItems.map((item) => (
           <button
             key={item.view}
             onClick={() => setView(item.view)}
-            className={`p-3 rounded-full transition-all duration-300 group relative ${
+            className={`p-3 md:p-4 rounded-full transition-all duration-300 group relative flex-shrink-0 ${
               currentView === item.view 
                 ? 'bg-white text-brand-black shadow-lg scale-110' 
                 : 'text-gray-400 hover:text-white hover:bg-white/10'
             }`}
+            aria-label={item.label}
           >
             {getIcon(item.view)}
             {/* Tooltip */}
-            <span className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-brand-black text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+            <span className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-brand-black text-white text-xs font-bold py-1.5 px-3 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-xl border border-white/10">
               {item.label}
             </span>
           </button>
         ))}
         
         {/* Separator */}
-        <div className="w-px h-6 bg-white/20 mx-1"></div>
+        <div className="w-px h-8 bg-white/20 mx-1 md:mx-2"></div>
 
         {/* Menu Trigger for other items */}
         <button 
-            onClick={() => setView('about')} // Just mapping to about for now as a "more" place or we could open a modal
-            className={`p-3 rounded-full transition-all duration-300 text-gray-400 hover:text-white hover:bg-white/10 ${['about', 'co-curricular', 'blog', 'gallery'].includes(currentView) ? 'text-white bg-white/10' : ''}`}
+            onClick={() => setView('about')} 
+            className={`p-3 md:p-4 rounded-full transition-all duration-300 text-gray-400 hover:text-white hover:bg-white/10 flex-shrink-0 ${['about', 'co-curricular', 'blog', 'gallery'].includes(currentView) ? 'text-white bg-white/10' : ''}`}
+            aria-label="More"
         >
             <LayoutGrid size={20} />
         </button>

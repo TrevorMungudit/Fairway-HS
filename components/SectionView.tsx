@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { ViewState } from '../types';
 import { BLOG_POSTS, GALLERY_IMAGES, SCHOOL_EMAIL, SCHOOL_PHONE, SCHOOL_LOCATION, FACULTY_MEMBERS } from '../constants';
-import { MapPin, Phone, Mail, User, CheckCircle, BookOpen, Download, Music, Trophy, Sprout, FlaskConical, Globe, Briefcase, Clock, Users, X } from 'lucide-react';
+import { MapPin, Phone, Mail, User, CheckCircle, BookOpen, Download, Music, Trophy, Sprout, FlaskConical, Globe, Briefcase, Clock, Users, X, Image } from 'lucide-react';
+import Footer from './Footer';
 
 interface SectionViewProps {
   view: ViewState;
@@ -17,8 +18,7 @@ const SectionView: React.FC<SectionViewProps> = ({ view, onBack, onNavigate }) =
       case 'about':
         return (
           <div className="space-y-8 animate-fadeIn">
-            <div className="relative h-64 rounded-3xl overflow-hidden mb-8">
-              <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1600&auto=format&fit=crop" alt="School Campus" className="w-full h-full object-cover" />
+            <div className="relative h-64 rounded-3xl overflow-hidden mb-8 bg-brand-black">
               <div className="absolute inset-0 bg-brand-accent/20 mix-blend-multiply"></div>
               <h2 className="absolute bottom-6 left-6 text-4xl font-display font-bold text-white">About Fairway High</h2>
             </div>
@@ -26,12 +26,13 @@ const SectionView: React.FC<SectionViewProps> = ({ view, onBack, onNavigate }) =
               <div className="space-y-4">
                 <h3 className="text-2xl font-bold font-display text-brand-black">Our History</h3>
                 <p className="text-gray-600 leading-relaxed">
-                  Established in 1998 in the heart of Kawempe-Kazo, Fairway High School has grown from a humble community initiative to a premier institution of learning. 
+                  Established in 2015 in the heart of Kawempe-Kazo, Fairway High School has grown from a humble community initiative to a premier institution of learning. 
                   Our journey is defined by a commitment to raising holistic citizens who excel in both sciences and arts. We have consistently produced excellent results in UNEB examinations, making us a top choice for parents in the region.
                 </p>
                 <h3 className="text-2xl font-bold font-display mt-8 text-brand-black">Mission & Vision</h3>
                 <div className="bg-sky-50/50 p-6 rounded-2xl border border-brand-accent/10">
                     <p className="font-medium text-brand-accent italic text-lg">"To empower young minds with knowledge, skills, and values for a dynamic world."</p>
+                    <p className="font-bold text-brand-black mt-4 uppercase tracking-widest text-sm">Toil and Preserve</p>
                 </div>
                 
                 {/* Link to Faculty Section */}
@@ -80,7 +81,9 @@ const SectionView: React.FC<SectionViewProps> = ({ view, onBack, onNavigate }) =
                             className="bg-white rounded-[2rem] p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all group cursor-pointer hover:border-brand-accent/30"
                         >
                             <div className="flex items-center gap-4 mb-4">
-                                <img src={member.image} alt={member.name} className="w-16 h-16 rounded-full object-cover border-2 border-brand-accent/20 group-hover:border-brand-accent transition-colors" />
+                                <div className="w-16 h-16 rounded-full bg-brand-gray flex items-center justify-center border-2 border-brand-accent/20 group-hover:border-brand-accent transition-colors">
+                                    <User size={32} className="text-brand-secondary" />
+                                </div>
                                 <div>
                                     <h3 className="font-bold text-lg text-brand-black leading-tight">{member.name}</h3>
                                     <p className="text-xs font-bold text-brand-accent uppercase tracking-wide">{member.role}</p>
@@ -109,7 +112,9 @@ const SectionView: React.FC<SectionViewProps> = ({ view, onBack, onNavigate }) =
                             <div className="flex flex-col items-center text-center mb-8">
                                 <div className="relative mb-6">
                                     <div className="absolute inset-0 bg-brand-accent/10 rounded-full blur-xl transform scale-110"></div>
-                                    <img src={selectedFaculty.image} alt={selectedFaculty.name} className="relative w-32 h-32 rounded-full object-cover border-4 border-white shadow-lg" />
+                                    <div className="relative w-32 h-32 rounded-full bg-brand-gray flex items-center justify-center border-4 border-white shadow-lg">
+                                        <User size={64} className="text-brand-secondary" />
+                                    </div>
                                 </div>
                                 <h3 className="text-3xl font-bold font-display text-brand-black mb-1">{selectedFaculty.name}</h3>
                                 <p className="text-brand-accent font-bold uppercase tracking-wider text-xs bg-brand-accent/5 px-3 py-1 rounded-full">{selectedFaculty.role}</p>
@@ -306,8 +311,12 @@ const SectionView: React.FC<SectionViewProps> = ({ view, onBack, onNavigate }) =
                        </div>
                    </div>
                    <div className="grid grid-cols-2 gap-3">
-                       <img src="https://images.unsplash.com/photo-1526232761682-d26e03ac148e?q=80&w=800&auto=format&fit=crop" className="rounded-2xl w-full h-64 object-cover translate-y-8 shadow-lg" alt="Sports" />
-                       <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?q=80&w=800&auto=format&fit=crop" className="rounded-2xl w-full h-64 object-cover -translate-y-8 shadow-lg" alt="Music" />
+                       <div className="rounded-2xl w-full h-64 bg-green-100 translate-y-8 shadow-lg flex items-center justify-center">
+                           <Trophy size={48} className="text-green-600 opacity-50" />
+                       </div>
+                       <div className="rounded-2xl w-full h-64 bg-purple-100 -translate-y-8 shadow-lg flex items-center justify-center">
+                           <Music size={48} className="text-purple-600 opacity-50" />
+                       </div>
                    </div>
                </div>
            </div>
@@ -320,7 +329,9 @@ const SectionView: React.FC<SectionViewProps> = ({ view, onBack, onNavigate }) =
                 <div className="grid gap-6">
                     {BLOG_POSTS.map(post => (
                         <div key={post.id} className="bg-white rounded-2xl p-4 flex flex-col md:flex-row gap-6 shadow-sm hover:shadow-md transition-shadow cursor-pointer border border-gray-100">
-                            <img src={post.image} alt={post.title} className="w-full md:w-48 h-32 object-cover rounded-xl" />
+                            <div className="w-full md:w-48 h-32 bg-brand-gray rounded-xl flex items-center justify-center shrink-0">
+                                <BookOpen size={32} className="text-brand-secondary opacity-50" />
+                            </div>
                             <div className="flex flex-col justify-center">
                                 <div className="flex items-center gap-2 text-xs font-bold text-gray-400 mb-2">
                                     <Clock size={14} /> {post.date}
@@ -340,8 +351,8 @@ const SectionView: React.FC<SectionViewProps> = ({ view, onBack, onNavigate }) =
                  <h2 className="text-3xl font-display font-bold text-brand-black">Campus Gallery</h2>
                  <div className="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
                      {GALLERY_IMAGES.map(img => (
-                         <div key={img.id} className="break-inside-avoid relative group rounded-2xl overflow-hidden cursor-zoom-in">
-                             <img src={img.url} alt={img.caption} className="w-full h-auto rounded-2xl transition-transform duration-500 group-hover:scale-110" />
+                         <div key={img.id} className="break-inside-avoid relative group rounded-2xl overflow-hidden cursor-pointer bg-brand-gray h-64 flex items-center justify-center">
+                             <div className="text-brand-secondary opacity-20"><Image size={48} /></div>
                              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                                  <p className="text-white font-medium">{img.caption}</p>
                              </div>
@@ -412,8 +423,9 @@ const SectionView: React.FC<SectionViewProps> = ({ view, onBack, onNavigate }) =
             Close X
          </button>
       </div>
-      <div className="p-6 md:p-10 overflow-y-auto custom-scrollbar">
+      <div className="p-6 md:p-10 pb-24 md:pb-32 overflow-y-auto custom-scrollbar">
         {renderContent()}
+        <Footer />
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ import React from 'react';
 import { ViewState } from '../types';
 import { BLOG_POSTS } from '../constants';
 import { ArrowRight, Search, Sparkles, ArrowUpRight, Calendar, Bell, Users } from 'lucide-react';
+import Footer from './Footer';
 
 interface HomePageProps {
   setView: (view: ViewState) => void;
@@ -21,6 +22,7 @@ const HomePage: React.FC<HomePageProps> = ({ setView, onOpenChat }) => {
             <div>
                 <p className="text-xs text-brand-secondary font-medium uppercase tracking-wider">Welcome to</p>
                 <h1 className="text-lg font-bold font-display leading-none">Fairway High</h1>
+                <p className="text-[10px] text-brand-accent font-bold uppercase tracking-widest mt-1">Toil and Preserve</p>
             </div>
         </div>
         <button onClick={() => setView('admissions')} className="bg-brand-gray hover:bg-gray-200 text-brand-black px-4 py-2 rounded-full text-sm font-medium transition-colors">
@@ -31,14 +33,9 @@ const HomePage: React.FC<HomePageProps> = ({ setView, onOpenChat }) => {
       {/* Bento Grid Hero */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12 auto-rows-[minmax(180px,auto)]">
         {/* Large Hero Item - Campus */}
-        <div className="col-span-1 md:col-span-2 lg:col-span-2 row-span-2 relative rounded-[2.5rem] overflow-hidden group cursor-pointer h-[300px] md:h-auto shadow-sm hover:shadow-md transition-all" onClick={() => setView('about')}>
-            <img 
-                src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1600&auto=format&fit=crop" 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                alt="Campus"
-            />
+        <div className="col-span-1 md:col-span-2 lg:col-span-2 row-span-2 relative rounded-[2.5rem] overflow-hidden group cursor-pointer h-[300px] md:h-auto shadow-sm hover:shadow-md transition-all bg-brand-black" onClick={() => setView('about')}>
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8">
-                <span className="bg-white/20 backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-3 border border-white/10">Established 1998</span>
+                <span className="bg-white/20 backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-3 border border-white/10">Established 2015</span>
                 <h2 className="text-white text-3xl md:text-4xl font-display font-bold leading-tight mb-2">Excellence in <br/>Kawempe-Kazo</h2>
                 <p className="text-white/80 text-sm md:text-base line-clamp-2">Empowering the next generation of leaders through holistic education.</p>
             </div>
@@ -72,13 +69,8 @@ const HomePage: React.FC<HomePageProps> = ({ setView, onOpenChat }) => {
         </div>
 
         {/* Sports/Co-curricular Item */}
-        <div className="relative rounded-[2.5rem] overflow-hidden group cursor-pointer h-[200px] md:h-auto shadow-sm hover:shadow-md transition-all" onClick={() => setView('co-curricular')}>
-             <img 
-                src="https://images.unsplash.com/photo-1526232761682-d26e03ac148e?q=80&w=800&auto=format&fit=crop" 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                alt="Sports"
-            />
-            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors flex flex-col justify-between p-8">
+        <div className="relative rounded-[2.5rem] overflow-hidden group cursor-pointer h-[200px] md:h-auto shadow-sm hover:shadow-md transition-all bg-green-600" onClick={() => setView('co-curricular')}>
+            <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors flex flex-col justify-between p-8">
                 <div className="flex justify-end">
                     <div className="bg-white/20 backdrop-blur-md p-3 rounded-full text-white border border-white/10">
                         <ArrowRight size={24} />
@@ -153,7 +145,8 @@ const HomePage: React.FC<HomePageProps> = ({ setView, onOpenChat }) => {
             ))}
         </div>
       </div>
-
+      
+      <Footer />
     </div>
   );
 };
