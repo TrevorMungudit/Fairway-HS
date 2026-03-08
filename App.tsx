@@ -1,29 +1,33 @@
 import React, { useState } from 'react';
-import Navbar from './components/Navbar';
-import BentoGrid from './components/BentoGrid';
+import FloatingDock from './components/FloatingDock';
+import HomePage from './components/HomePage';
 import SectionView from './components/SectionView';
 import GeminiChat from './components/GeminiChat';
 import { ViewState } from './types';
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<ViewState>('home');
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   return (
-    <div className="w-full max-w-[1600px] h-[95vh] md:h-[90vh] bg-white rounded-[3rem] shadow-2xl flex flex-col overflow-hidden relative border-8 border-white">
-        {/* Dot Pattern Background Overlay inside the main card */}
-        <div className="absolute inset-0 bg-dot-pattern opacity-30 pointer-events-none"></div>
+    <div className="w-full h-screen bg-gray-100 flex items-center justify-center p-0 md:p-4 lg:p-8">
+        {/* Main App Container - Mobile App Style */}
+        <div className="w-full max-w-[1200px] h-full md:h-[90vh] bg-white md:rounded-[3rem] shadow-2xl flex flex-col overflow-hidden relative">
+            
+            <main className="flex-1 overflow-hidden relative z-10">
+              {currentView === 'home' ? (
+                <HomePage setView={setCurrentView} onOpenChat={() => setIsChatOpen(true)} />
+              ) : (
+                <SectionView view={currentView} onBack={() => setCurrentView('home')} />
+              )}
+            </main>
 
-        <Navbar currentView={currentView} setView={setCurrentView} />
-        
-        <main className="flex-1 p-4 md:p-6 lg:px-8 lg:pb-8 overflow-hidden relative z-10">
-          {currentView === 'home' ? (
-            <BentoGrid setView={setCurrentView} />
-          ) : (
-            <SectionView view={currentView} onBack={() => setCurrentView('home')} />
-          )}
-        </main>
+            {/* Floating Dock Navigation */}
+            <FloatingDock currentView={currentView} setView={setCurrentView} />
 
-        <GeminiChat />
+            {/* Chat Component */}
+            <GeminiChat isOpen={isChatOpen} setIsOpen={setIsChatOpen} />
+        </div>
     </div>
   );
 };

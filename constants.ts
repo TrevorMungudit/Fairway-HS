@@ -7,11 +7,10 @@ export const SCHOOL_EMAIL = "admissions@fairwayhigh.ac.ug";
 
 export const NAV_ITEMS: NavItem[] = [
   { label: 'Home', view: 'home' },
-  { label: 'About', view: 'about' },
+  { label: 'About Us', view: 'about' },
+  { label: 'Academics', view: 'academics' },
   { label: 'Admissions', view: 'admissions' },
-  { label: 'Student Life', view: 'student-life' },
-  { label: 'Blog', view: 'blog' },
-  { label: 'Gallery', view: 'gallery' },
+  { label: 'Co-curricular', view: 'co-curricular' },
   { label: 'Contact', view: 'contact' },
 ];
 

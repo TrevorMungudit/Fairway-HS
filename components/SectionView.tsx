@@ -1,7 +1,7 @@
 import React from 'react';
-import { ViewState, BlogPost, GalleryItem } from '../types';
+import { ViewState } from '../types';
 import { BLOG_POSTS, GALLERY_IMAGES, SCHOOL_EMAIL, SCHOOL_PHONE, SCHOOL_LOCATION } from '../constants';
-import { Calendar, MapPin, Phone, Mail, User, Clock, CheckCircle, BookOpen } from 'lucide-react';
+import { MapPin, Phone, Mail, User, CheckCircle, BookOpen, Download, Music, Trophy, Sprout, FlaskConical, Globe, Briefcase, Clock } from 'lucide-react';
 
 interface SectionViewProps {
   view: ViewState;
@@ -15,33 +15,33 @@ const SectionView: React.FC<SectionViewProps> = ({ view, onBack }) => {
         return (
           <div className="space-y-8 animate-fadeIn">
             <div className="relative h-64 rounded-3xl overflow-hidden mb-8">
-              <img src="https://picsum.photos/id/180/1200/400" alt="School Campus" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-brand-purple/20 mix-blend-multiply"></div>
+              <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1600&auto=format&fit=crop" alt="School Campus" className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-brand-accent/20 mix-blend-multiply"></div>
               <h2 className="absolute bottom-6 left-6 text-4xl font-display font-bold text-white">About Fairway High</h2>
             </div>
             <div className="grid md:grid-cols-2 gap-8">
               <div className="space-y-4">
-                <h3 className="text-2xl font-bold font-display">Our History</h3>
+                <h3 className="text-2xl font-bold font-display text-brand-black">Our History</h3>
                 <p className="text-gray-600 leading-relaxed">
-                  Established in Kawempe-Kazo, Fairway High School has grown from a humble community initiative to a premier institution of learning. 
-                  Our journey is defined by a commitment to raising holistic citizens who excel in both sciences and arts.
+                  Established in 1998 in the heart of Kawempe-Kazo, Fairway High School has grown from a humble community initiative to a premier institution of learning. 
+                  Our journey is defined by a commitment to raising holistic citizens who excel in both sciences and arts. We have consistently produced excellent results in UNEB examinations, making us a top choice for parents in the region.
                 </p>
-                <h3 className="text-2xl font-bold font-display mt-8">Mission & Vision</h3>
-                <div className="bg-brand-purple/5 p-6 rounded-2xl border border-brand-purple/10">
-                    <p className="font-medium text-brand-purple italic">"To empower young minds with knowledge, skills, and values for a dynamic world."</p>
+                <h3 className="text-2xl font-bold font-display mt-8 text-brand-black">Mission & Vision</h3>
+                <div className="bg-indigo-50/50 p-6 rounded-2xl border border-brand-accent/10">
+                    <p className="font-medium text-brand-accent italic text-lg">"To empower young minds with knowledge, skills, and values for a dynamic world."</p>
                 </div>
               </div>
               <div className="space-y-6">
                  <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                    <h4 className="font-bold mb-3 flex items-center gap-2"><CheckCircle size={18} className="text-brand-lime"/> Academic Excellence</h4>
+                    <h4 className="font-bold mb-3 flex items-center gap-2 text-brand-black"><CheckCircle size={18} className="text-brand-accent"/> Academic Excellence</h4>
                     <p className="text-sm text-gray-500">Consistent top performance in UNEB O'Level and A'Level examinations.</p>
                  </div>
                  <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                    <h4 className="font-bold mb-3 flex items-center gap-2"><CheckCircle size={18} className="text-brand-lime"/> Holistic Education</h4>
+                    <h4 className="font-bold mb-3 flex items-center gap-2 text-brand-black"><CheckCircle size={18} className="text-brand-accent"/> Holistic Education</h4>
                     <p className="text-sm text-gray-500">Strong focus on sports, music, dance, and drama alongside academics.</p>
                  </div>
                  <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                    <h4 className="font-bold mb-3 flex items-center gap-2"><CheckCircle size={18} className="text-brand-lime"/> Community</h4>
+                    <h4 className="font-bold mb-3 flex items-center gap-2 text-brand-black"><CheckCircle size={18} className="text-brand-accent"/> Community</h4>
                     <p className="text-sm text-gray-500">Deeply rooted in the Kawempe-Kazo community with strong parent involvement.</p>
                  </div>
               </div>
@@ -49,31 +49,100 @@ const SectionView: React.FC<SectionViewProps> = ({ view, onBack }) => {
           </div>
         );
 
+      case 'academics':
+        return (
+            <div className="space-y-8 animate-fadeIn">
+                <div className="text-center max-w-2xl mx-auto mb-12">
+                    <h2 className="text-4xl font-display font-bold mb-4 text-brand-black">Academic Programs</h2>
+                    <p className="text-gray-600">We offer a comprehensive curriculum designed to challenge students and prepare them for higher education and career success.</p>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-8">
+                    {/* O-Level */}
+                    <div className="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm">
+                        <h3 className="text-2xl font-bold font-display mb-4 text-brand-accent">O-Level Curriculum</h3>
+                        <p className="text-gray-600 mb-6 text-sm">Our Lower Secondary curriculum follows the new competence-based curriculum (CBC) by NCDC, focusing on learner-centered education.</p>
+                        <ul className="space-y-2">
+                            {['Mathematics', 'English Language', 'Physics, Chemistry, Biology', 'History & Geography', 'Religious Education', 'Kiswahili', 'Entrepreneurship'].map((subject, i) => (
+                                <li key={i} className="flex items-center gap-2 text-sm font-medium text-gray-700">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-brand-accent"></div> {subject}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* A-Level */}
+                    <div className="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm">
+                        <h3 className="text-2xl font-bold font-display mb-4 text-brand-accent">A-Level Curriculum</h3>
+                        <p className="text-gray-600 mb-6 text-sm">We offer a wide range of combinations for Uganda Advanced Certificate of Education (UACE) in both Arts and Sciences.</p>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div>
+                                <h4 className="font-bold text-sm uppercase text-gray-400 mb-2">Sciences</h4>
+                                <ul className="space-y-1 text-sm text-gray-700">
+                                    <li>PCM / PCB</li>
+                                    <li>PEM / BCM</li>
+                                    <li>MEG / MAG</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 className="font-bold text-sm uppercase text-gray-400 mb-2">Arts</h4>
+                                <ul className="space-y-1 text-sm text-gray-700">
+                                    <li>HEG / HEL</li>
+                                    <li>LEG / DEG</li>
+                                    <li>HED / HLG</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Departments */}
+                <h3 className="text-2xl font-bold font-display mt-8 mb-6 text-brand-black">Our Departments</h3>
+                <div className="grid md:grid-cols-3 gap-6">
+                    <div className="bg-indigo-50 p-6 rounded-2xl hover:bg-indigo-100 transition-colors">
+                        <FlaskConical className="text-brand-accent mb-4" size={32} />
+                        <h4 className="font-bold text-lg mb-2">Science Department</h4>
+                        <p className="text-sm text-gray-600">Equipped with modern Physics, Chemistry, and Biology laboratories for practical learning.</p>
+                    </div>
+                    <div className="bg-amber-50 p-6 rounded-2xl hover:bg-amber-100 transition-colors">
+                        <Globe className="text-brand-accent mb-4" size={32} />
+                        <h4 className="font-bold text-lg mb-2">Humanities</h4>
+                        <p className="text-sm text-gray-600">Fostering critical thinking and cultural awareness through History, Geography, and Literature.</p>
+                    </div>
+                    <div className="bg-green-50 p-6 rounded-2xl hover:bg-green-100 transition-colors">
+                        <Briefcase className="text-green-600 mb-4" size={32} />
+                        <h4 className="font-bold text-lg mb-2">Vocational</h4>
+                        <p className="text-sm text-gray-600">Practical skills in Agriculture, Fine Art, ICT, and Entrepreneurship for self-reliance.</p>
+                    </div>
+                </div>
+            </div>
+        );
+
       case 'admissions':
         return (
           <div className="max-w-4xl mx-auto space-y-8 animate-fadeIn">
             <div className="text-center space-y-4 mb-12">
-               <h2 className="text-4xl font-display font-bold">Join the Fairway Family</h2>
+               <h2 className="text-4xl font-display font-bold text-brand-black">Join the Fairway Family</h2>
                <p className="text-gray-600 max-w-2xl mx-auto">We are accepting applications for Senior 1 and Senior 5 for the upcoming academic year. Secure your place today.</p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-6">
-                <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm text-center">
-                    <div className="w-12 h-12 bg-brand-purple/10 text-brand-purple rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm text-center group hover:border-brand-accent transition-colors">
+                    <div className="w-12 h-12 bg-indigo-50 text-brand-accent rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
                         <User size={24} />
                     </div>
                     <h3 className="font-bold text-lg mb-2">1. Register</h3>
-                    <p className="text-sm text-gray-500">Download the form or pick one from the school bursar's office.</p>
+                    <p className="text-sm text-gray-500">Download the form below or pick one from the school bursar's office.</p>
                 </div>
-                <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm text-center">
-                    <div className="w-12 h-12 bg-brand-lime/20 text-green-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm text-center group hover:border-brand-accent transition-colors">
+                    <div className="w-12 h-12 bg-amber-100 text-brand-accent rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
                         <BookOpen size={24} />
                     </div>
                     <h3 className="font-bold text-lg mb-2">2. Interview</h3>
                     <p className="text-sm text-gray-500">Attend a brief oral and written interview to assess academic placement.</p>
                 </div>
-                <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm text-center">
-                    <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm text-center group hover:border-green-500 transition-colors">
+                    <div className="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
                         <CheckCircle size={24} />
                     </div>
                     <h3 className="font-bold text-lg mb-2">3. Admission</h3>
@@ -81,48 +150,76 @@ const SectionView: React.FC<SectionViewProps> = ({ view, onBack }) => {
                 </div>
             </div>
 
+            <div className="flex justify-center my-8">
+                <button className="bg-brand-accent text-white px-8 py-4 rounded-full font-bold flex items-center gap-3 hover:bg-indigo-600 transition-all shadow-lg shadow-brand-accent/20">
+                    <Download size={20} /> Download Application Form (PDF)
+                </button>
+            </div>
+
             <div className="bg-gray-50 rounded-3xl p-8 mt-8">
-                <h3 className="font-bold text-xl mb-6">Enquiry Form</h3>
+                <h3 className="font-bold text-xl mb-6 text-brand-black">Enquiry Form</h3>
                 <form className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-1">
                         <label className="text-xs font-bold text-gray-500 uppercase">Student Name</label>
-                        <input type="text" className="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-brand-purple" placeholder="John Doe" />
+                        <input type="text" className="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent" placeholder="John Doe" />
                     </div>
                     <div className="space-y-1">
                         <label className="text-xs font-bold text-gray-500 uppercase">Parent Phone</label>
-                        <input type="tel" className="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-brand-purple" placeholder="+256..." />
+                        <input type="tel" className="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent" placeholder="+256..." />
                     </div>
                     <div className="space-y-1 md:col-span-2">
                         <label className="text-xs font-bold text-gray-500 uppercase">Message / Class of Interest</label>
-                        <textarea className="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-brand-purple h-32" placeholder="I am interested in S1 placement..."></textarea>
+                        <textarea className="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent h-32" placeholder="I am interested in S1 placement..."></textarea>
                     </div>
                     <div className="md:col-span-2">
-                        <button type="button" className="w-full bg-brand-black text-white font-bold py-4 rounded-xl hover:bg-brand-purple transition-colors">Submit Enquiry</button>
+                        <button type="button" className="w-full bg-brand-black text-white font-bold py-4 rounded-xl hover:bg-gray-800 transition-colors">Submit Enquiry</button>
                     </div>
                 </form>
             </div>
           </div>
         );
 
-      case 'student-life':
+      case 'co-curricular':
         return (
            <div className="space-y-8 animate-fadeIn">
                <div className="grid md:grid-cols-2 gap-8 items-center">
                    <div>
-                       <h2 className="text-4xl font-display font-bold mb-4">Beyond the Classroom</h2>
+                       <h2 className="text-4xl font-display font-bold mb-4 text-brand-black">Beyond the Classroom</h2>
                        <p className="text-gray-600 mb-6">At Fairway High, education goes beyond textbooks. We believe in nurturing talent through a vibrant array of extra-curricular activities.</p>
-                       <ul className="space-y-3">
-                           {['Football & Netball Teams', 'Music, Dance & Drama (MDD)', 'Debating Club', 'ICT & Coding Club', 'Science Innovation Club', 'Scripture Union'].map((item, i) => (
-                               <li key={i} className="flex items-center gap-2 font-medium bg-white p-3 rounded-lg shadow-sm">
-                                   <div className="w-2 h-2 rounded-full bg-brand-purple"></div>
-                                   {item}
-                               </li>
-                           ))}
-                       </ul>
+                       
+                       <div className="space-y-6">
+                           <div className="flex gap-4">
+                               <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600 shrink-0">
+                                   <Trophy size={24} />
+                               </div>
+                               <div>
+                                   <h4 className="font-bold text-lg">Sports & Games</h4>
+                                   <p className="text-sm text-gray-600">Our Football and Netball teams compete at the district level. We emphasize teamwork, physical fitness, and fair play.</p>
+                               </div>
+                           </div>
+                           <div className="flex gap-4">
+                               <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 shrink-0">
+                                   <Music size={24} />
+                               </div>
+                               <div>
+                                   <h4 className="font-bold text-lg">Music, Dance & Drama (MDD)</h4>
+                                   <p className="text-sm text-gray-600">A vibrant part of our culture. Students engage in traditional dance, drama, and music competitions.</p>
+                               </div>
+                           </div>
+                           <div className="flex gap-4">
+                               <div className="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center text-amber-600 shrink-0">
+                                   <Sprout size={24} />
+                               </div>
+                               <div>
+                                   <h4 className="font-bold text-lg">Agriculture Club</h4>
+                                   <p className="text-sm text-gray-600">Practical skills in our school garden. Students learn modern farming techniques and crop management.</p>
+                               </div>
+                           </div>
+                       </div>
                    </div>
                    <div className="grid grid-cols-2 gap-3">
-                       <img src="https://picsum.photos/id/450/300/400" className="rounded-2xl w-full h-full object-cover translate-y-8" alt="Sports" />
-                       <img src="https://picsum.photos/id/452/300/400" className="rounded-2xl w-full h-full object-cover -translate-y-8" alt="Music" />
+                       <img src="https://images.unsplash.com/photo-1526232761682-d26e03ac148e?q=80&w=800&auto=format&fit=crop" className="rounded-2xl w-full h-64 object-cover translate-y-8 shadow-lg" alt="Sports" />
+                       <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?q=80&w=800&auto=format&fit=crop" className="rounded-2xl w-full h-64 object-cover -translate-y-8 shadow-lg" alt="Music" />
                    </div>
                </div>
            </div>
@@ -131,14 +228,14 @@ const SectionView: React.FC<SectionViewProps> = ({ view, onBack }) => {
       case 'blog':
         return (
             <div className="space-y-6 animate-fadeIn">
-                <h2 className="text-3xl font-display font-bold">Latest News & Updates</h2>
+                <h2 className="text-3xl font-display font-bold text-brand-black">Latest News & Updates</h2>
                 <div className="grid gap-6">
                     {BLOG_POSTS.map(post => (
                         <div key={post.id} className="bg-white rounded-2xl p-4 flex flex-col md:flex-row gap-6 shadow-sm hover:shadow-md transition-shadow cursor-pointer border border-gray-100">
                             <img src={post.image} alt={post.title} className="w-full md:w-48 h-32 object-cover rounded-xl" />
                             <div className="flex flex-col justify-center">
                                 <div className="flex items-center gap-2 text-xs font-bold text-gray-400 mb-2">
-                                    <Calendar size={14} /> {post.date}
+                                    <Clock size={14} /> {post.date}
                                 </div>
                                 <h3 className="font-bold text-xl mb-2 text-gray-800">{post.title}</h3>
                                 <p className="text-gray-600 text-sm">{post.excerpt}</p>
@@ -152,11 +249,11 @@ const SectionView: React.FC<SectionViewProps> = ({ view, onBack }) => {
       case 'gallery':
         return (
             <div className="space-y-6 animate-fadeIn">
-                 <h2 className="text-3xl font-display font-bold">Campus Gallery</h2>
+                 <h2 className="text-3xl font-display font-bold text-brand-black">Campus Gallery</h2>
                  <div className="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
                      {GALLERY_IMAGES.map(img => (
                          <div key={img.id} className="break-inside-avoid relative group rounded-2xl overflow-hidden cursor-zoom-in">
-                             <img src={img.url} alt={img.caption} className="w-full h-auto rounded-2xl" />
+                             <img src={img.url} alt={img.caption} className="w-full h-auto rounded-2xl transition-transform duration-500 group-hover:scale-110" />
                              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                                  <p className="text-white font-medium">{img.caption}</p>
                              </div>
@@ -169,12 +266,12 @@ const SectionView: React.FC<SectionViewProps> = ({ view, onBack }) => {
       case 'contact':
         return (
             <div className="grid md:grid-cols-2 gap-8 animate-fadeIn h-full">
-                <div className="bg-brand-lime rounded-[2.5rem] p-8 md:p-12 flex flex-col justify-between text-brand-black min-h-[400px]">
+                <div className="bg-brand-black rounded-[2.5rem] p-8 md:p-12 flex flex-col justify-between text-white min-h-[400px]">
                     <div>
                         <h2 className="text-4xl font-display font-bold mb-6">Get in Touch</h2>
                         <div className="space-y-6">
                             <div className="flex items-start gap-4">
-                                <div className="bg-white/40 p-3 rounded-full"><MapPin size={24} /></div>
+                                <div className="bg-white/10 p-3 rounded-full"><MapPin size={24} /></div>
                                 <div>
                                     <h4 className="font-bold text-lg">Visit Us</h4>
                                     <p className="opacity-80">{SCHOOL_LOCATION}</p>
@@ -182,14 +279,14 @@ const SectionView: React.FC<SectionViewProps> = ({ view, onBack }) => {
                                 </div>
                             </div>
                             <div className="flex items-start gap-4">
-                                <div className="bg-white/40 p-3 rounded-full"><Phone size={24} /></div>
+                                <div className="bg-white/10 p-3 rounded-full"><Phone size={24} /></div>
                                 <div>
                                     <h4 className="font-bold text-lg">Call Us</h4>
                                     <p className="opacity-80">{SCHOOL_PHONE}</p>
                                 </div>
                             </div>
                             <div className="flex items-start gap-4">
-                                <div className="bg-white/40 p-3 rounded-full"><Mail size={24} /></div>
+                                <div className="bg-white/10 p-3 rounded-full"><Mail size={24} /></div>
                                 <div>
                                     <h4 className="font-bold text-lg">Email</h4>
                                     <p className="opacity-80">{SCHOOL_EMAIL}</p>
@@ -197,18 +294,18 @@ const SectionView: React.FC<SectionViewProps> = ({ view, onBack }) => {
                             </div>
                         </div>
                     </div>
-                    <div className="mt-8 pt-8 border-t border-black/10">
+                    <div className="mt-8 pt-8 border-t border-white/10">
                          <p className="font-display font-bold text-xl">"Education is the key to success."</p>
                     </div>
                 </div>
                 
                 <div className="bg-white rounded-[2.5rem] p-8 md:p-12 border border-gray-100 shadow-sm flex flex-col justify-center">
-                    <h3 className="font-bold text-2xl mb-6">Send us a message</h3>
+                    <h3 className="font-bold text-2xl mb-6 text-brand-black">Send us a message</h3>
                     <form className="space-y-4">
-                        <input type="text" placeholder="Your Name" className="w-full p-4 bg-gray-50 rounded-xl border-none focus:ring-2 focus:ring-brand-lime" />
-                        <input type="email" placeholder="Email Address" className="w-full p-4 bg-gray-50 rounded-xl border-none focus:ring-2 focus:ring-brand-lime" />
-                        <textarea placeholder="How can we help?" className="w-full p-4 bg-gray-50 rounded-xl border-none focus:ring-2 focus:ring-brand-lime h-32"></textarea>
-                        <button className="w-full bg-brand-black text-white font-bold py-4 rounded-xl hover:bg-gray-800 transition-colors">Send Message</button>
+                        <input type="text" placeholder="Your Name" className="w-full p-4 bg-gray-50 rounded-xl border-none focus:ring-2 focus:ring-brand-accent" />
+                        <input type="email" placeholder="Email Address" className="w-full p-4 bg-gray-50 rounded-xl border-none focus:ring-2 focus:ring-brand-accent" />
+                        <textarea placeholder="How can we help?" className="w-full p-4 bg-gray-50 rounded-xl border-none focus:ring-2 focus:ring-brand-accent h-32"></textarea>
+                        <button className="w-full bg-brand-accent text-white font-bold py-4 rounded-xl hover:bg-indigo-600 transition-colors">Send Message</button>
                     </form>
                 </div>
             </div>
@@ -222,8 +319,8 @@ const SectionView: React.FC<SectionViewProps> = ({ view, onBack }) => {
   return (
     <div className="bg-white/90 backdrop-blur-md rounded-[2.5rem] w-full h-full overflow-hidden flex flex-col relative animate-slideUp">
       <div className="p-6 md:p-8 border-b border-gray-100 flex justify-between items-center bg-white/50 sticky top-0 z-20">
-         <h2 className="text-xl font-bold font-display uppercase tracking-widest text-brand-purple">{view.replace('-', ' ')}</h2>
-         <button onClick={onBack} className="text-sm font-bold bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-full transition-colors">
+         <h2 className="text-xl font-bold font-display uppercase tracking-widest text-brand-accent">{view.replace('-', ' ')}</h2>
+         <button onClick={onBack} className="text-sm font-bold bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-full transition-colors text-gray-600">
             Close X
          </button>
       </div>

@@ -1,4 +1,4 @@
-export type ViewState = 'home' | 'about' | 'admissions' | 'student-life' | 'gallery' | 'blog' | 'contact';
+export type ViewState = 'home' | 'about' | 'academics' | 'admissions' | 'co-curricular' | 'gallery' | 'blog' | 'contact';
 
 export interface BlogPost {
   id: number;

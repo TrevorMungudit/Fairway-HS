@@ -3,8 +3,12 @@ import { MessageCircle, X, Send, Loader2, Sparkles } from 'lucide-react';
 import { sendMessageToGemini } from '../services/geminiService';
 import { ChatMessage } from '../types';
 
-const GeminiChat: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
+interface GeminiChatProps {
+    isOpen: boolean;
+    setIsOpen: (isOpen: boolean) => void;
+}
+
+const GeminiChat: React.FC<GeminiChatProps> = ({ isOpen, setIsOpen }) => {
   const [messages, setMessages] = useState<ChatMessage[]>([
     { id: '1', role: 'model', text: 'Hello! I am the Fairway AI Assistant. Ask me anything about our school, admissions, or student life.' }
   ]);
@@ -57,44 +61,46 @@ const GeminiChat: React.FC = () => {
 
   return (
     <>
-      {/* Floating Toggle Button */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-6 right-6 z-50 p-4 rounded-full shadow-xl transition-all duration-300 hover:scale-105 ${
-          isOpen ? 'bg-red-500 rotate-90' : 'bg-brand-black hover:bg-brand-purple'
-        } text-white`}
-      >
-        {isOpen ? <X size={24} /> : <MessageCircle size={24} />}
-      </button>
+      {/* Floating Toggle Button (Only visible if chat is closed, maybe we don't need it if we have the search bar) */}
+      {/* We'll keep it as a fallback or for closing */}
+      {isOpen && (
+        <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 md:hidden" onClick={() => setIsOpen(false)}></div>
+      )}
 
       {/* Chat Window */}
       <div
-        className={`fixed bottom-24 right-6 w-80 md:w-96 bg-white rounded-2xl shadow-2xl z-50 overflow-hidden flex flex-col transition-all duration-300 origin-bottom-right border border-gray-100 ${
-          isOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-90 translate-y-10 pointer-events-none'
+        className={`fixed bottom-0 md:bottom-24 right-0 md:right-6 w-full md:w-96 h-[80vh] md:h-[600px] bg-white md:rounded-3xl shadow-2xl z-50 overflow-hidden flex flex-col transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) ${
+          isOpen ? 'translate-y-0 opacity-100' : 'translate-y-[110%] opacity-0 pointer-events-none'
         }`}
-        style={{ height: '500px', maxHeight: '80vh' }}
       >
         {/* Header */}
-        <div className="bg-brand-black text-white p-4 flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <Sparkles className="text-brand-lime" size={20} />
-            <h3 className="font-bold font-display">Fairway AI Assistant</h3>
+        <div className="bg-white border-b border-gray-100 p-4 flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <div className="bg-brand-accent p-2 rounded-full text-white">
+                <Sparkles size={18} />
+            </div>
+            <div>
+                <h3 className="font-bold font-display text-brand-black">Fairway Assistant</h3>
+                <p className="text-xs text-brand-secondary">Powered by Gemini</p>
+            </div>
           </div>
-          <span className="text-xs bg-brand-purple px-2 py-1 rounded-full text-white">Gemini Powered</span>
+          <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+            <X size={20} className="text-brand-black" />
+          </button>
         </div>
 
         {/* Messages Area */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 custom-scrollbar">
+        <div className="flex-1 overflow-y-auto p-4 space-y-6 bg-white custom-scrollbar">
           {messages.map((msg) => (
             <div
               key={msg.id}
               className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
             >
               <div
-                className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm ${
+                className={`max-w-[85%] px-5 py-3 text-sm leading-relaxed ${
                   msg.role === 'user'
-                    ? 'bg-brand-black text-white rounded-br-none'
-                    : 'bg-white border border-gray-200 text-gray-800 rounded-bl-none shadow-sm'
+                    ? 'bg-brand-black text-white rounded-[1.5rem] rounded-br-sm'
+                    : 'bg-brand-gray text-brand-black rounded-[1.5rem] rounded-bl-sm'
                 }`}
               >
                 {msg.text}
@@ -103,8 +109,8 @@ const GeminiChat: React.FC = () => {
           ))}
           {isTyping && (
             <div className="flex justify-start">
-              <div className="bg-white border border-gray-200 rounded-2xl rounded-bl-none px-4 py-3 shadow-sm flex items-center space-x-2">
-                <Loader2 className="animate-spin text-brand-purple" size={16} />
+              <div className="bg-brand-gray rounded-[1.5rem] rounded-bl-sm px-5 py-3 flex items-center space-x-2">
+                <Loader2 className="animate-spin text-brand-accent" size={16} />
                 <span className="text-xs text-gray-500">Thinking...</span>
               </div>
             </div>
@@ -114,19 +120,19 @@ const GeminiChat: React.FC = () => {
 
         {/* Input Area */}
         <div className="p-4 bg-white border-t border-gray-100">
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 bg-brand-gray rounded-full p-1 pl-4">
             <input
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={handleKeyPress}
-              placeholder="Ask about admissions..."
-              className="flex-1 bg-gray-100 text-gray-800 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-purple"
+              placeholder="Ask anything..."
+              className="flex-1 bg-transparent text-brand-black text-sm focus:outline-none"
             />
             <button
               onClick={handleSend}
               disabled={isTyping || !inputValue.trim()}
-              className="p-2 bg-brand-black text-white rounded-full hover:bg-brand-purple disabled:opacity-50 transition-colors"
+              className="p-3 bg-brand-black text-white rounded-full hover:bg-brand-accent disabled:opacity-50 transition-all duration-300 transform hover:scale-105"
             >
               <Send size={18} />
             </button>
