@@ -18,7 +18,7 @@ const App: React.FC = () => {
               {currentView === 'home' ? (
                 <HomePage setView={setCurrentView} onOpenChat={() => setIsChatOpen(true)} />
               ) : (
-                <SectionView view={currentView} onBack={() => setCurrentView('home')} />
+                <SectionView view={currentView} onBack={() => setCurrentView('home')} onNavigate={setCurrentView} />
               )}
             </main>
 

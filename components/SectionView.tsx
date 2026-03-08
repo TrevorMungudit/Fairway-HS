@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ViewState } from '../types';
-import { BLOG_POSTS, GALLERY_IMAGES, SCHOOL_EMAIL, SCHOOL_PHONE, SCHOOL_LOCATION } from '../constants';
-import { MapPin, Phone, Mail, User, CheckCircle, BookOpen, Download, Music, Trophy, Sprout, FlaskConical, Globe, Briefcase, Clock } from 'lucide-react';
+import { BLOG_POSTS, GALLERY_IMAGES, SCHOOL_EMAIL, SCHOOL_PHONE, SCHOOL_LOCATION, FACULTY_MEMBERS } from '../constants';
+import { MapPin, Phone, Mail, User, CheckCircle, BookOpen, Download, Music, Trophy, Sprout, FlaskConical, Globe, Briefcase, Clock, Users, X } from 'lucide-react';
 
 interface SectionViewProps {
   view: ViewState;
   onBack: () => void;
+  onNavigate: (view: ViewState) => void;
 }
 
-const SectionView: React.FC<SectionViewProps> = ({ view, onBack }) => {
+const SectionView: React.FC<SectionViewProps> = ({ view, onBack, onNavigate }) => {
+  const [selectedFacultyId, setSelectedFacultyId] = useState<number | null>(null);
+
   const renderContent = () => {
     switch (view) {
       case 'about':
@@ -27,8 +30,18 @@ const SectionView: React.FC<SectionViewProps> = ({ view, onBack }) => {
                   Our journey is defined by a commitment to raising holistic citizens who excel in both sciences and arts. We have consistently produced excellent results in UNEB examinations, making us a top choice for parents in the region.
                 </p>
                 <h3 className="text-2xl font-bold font-display mt-8 text-brand-black">Mission & Vision</h3>
-                <div className="bg-indigo-50/50 p-6 rounded-2xl border border-brand-accent/10">
+                <div className="bg-sky-50/50 p-6 rounded-2xl border border-brand-accent/10">
                     <p className="font-medium text-brand-accent italic text-lg">"To empower young minds with knowledge, skills, and values for a dynamic world."</p>
+                </div>
+                
+                {/* Link to Faculty Section */}
+                <div className="mt-8">
+                    <button 
+                        onClick={() => onNavigate('faculty')} 
+                        className="flex items-center gap-2 text-brand-accent font-bold hover:underline group"
+                    >
+                        Meet our Staff & Faculty <Users size={18} className="group-hover:translate-x-1 transition-transform" />
+                    </button>
                 </div>
               </div>
               <div className="space-y-6">
@@ -47,6 +60,81 @@ const SectionView: React.FC<SectionViewProps> = ({ view, onBack }) => {
               </div>
             </div>
           </div>
+        );
+
+      case 'faculty':
+        const selectedFaculty = FACULTY_MEMBERS.find(m => m.id === selectedFacultyId);
+
+        return (
+            <div className="space-y-8 animate-fadeIn relative">
+                <div className="text-center max-w-2xl mx-auto mb-12">
+                    <h2 className="text-4xl font-display font-bold mb-4 text-brand-black">Our Dedicated Team</h2>
+                    <p className="text-gray-600">Meet the passionate educators and staff who make Fairway High School a center of excellence.</p>
+                </div>
+
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {FACULTY_MEMBERS.map(member => (
+                        <div 
+                            key={member.id} 
+                            onClick={() => setSelectedFacultyId(member.id)}
+                            className="bg-white rounded-[2rem] p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all group cursor-pointer hover:border-brand-accent/30"
+                        >
+                            <div className="flex items-center gap-4 mb-4">
+                                <img src={member.image} alt={member.name} className="w-16 h-16 rounded-full object-cover border-2 border-brand-accent/20 group-hover:border-brand-accent transition-colors" />
+                                <div>
+                                    <h3 className="font-bold text-lg text-brand-black leading-tight">{member.name}</h3>
+                                    <p className="text-xs font-bold text-brand-accent uppercase tracking-wide">{member.role}</p>
+                                </div>
+                            </div>
+                            <p className="text-sm text-gray-600 leading-relaxed opacity-80 line-clamp-3">{member.bio}</p>
+                            <p className="text-xs font-bold text-brand-accent mt-4 group-hover:underline flex items-center gap-1">Read full bio <span className="group-hover:translate-x-1 transition-transform">&rarr;</span></p>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Modal Overlay */}
+                {selectedFaculty && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-fadeIn" onClick={() => setSelectedFacultyId(null)}>
+                        <div 
+                            className="bg-white rounded-[2.5rem] max-w-lg w-full p-8 shadow-2xl relative animate-slideUp" 
+                            onClick={e => e.stopPropagation()}
+                        >
+                            <button 
+                                onClick={() => setSelectedFacultyId(null)}
+                                className="absolute top-6 right-6 p-2 bg-gray-50 hover:bg-gray-100 rounded-full transition-colors text-gray-500 hover:text-brand-black"
+                            >
+                                <X size={24} />
+                            </button>
+                            
+                            <div className="flex flex-col items-center text-center mb-8">
+                                <div className="relative mb-6">
+                                    <div className="absolute inset-0 bg-brand-accent/10 rounded-full blur-xl transform scale-110"></div>
+                                    <img src={selectedFaculty.image} alt={selectedFaculty.name} className="relative w-32 h-32 rounded-full object-cover border-4 border-white shadow-lg" />
+                                </div>
+                                <h3 className="text-3xl font-bold font-display text-brand-black mb-1">{selectedFaculty.name}</h3>
+                                <p className="text-brand-accent font-bold uppercase tracking-wider text-xs bg-brand-accent/5 px-3 py-1 rounded-full">{selectedFaculty.role}</p>
+                            </div>
+                            
+                            <div className="prose prose-sm max-w-none text-gray-600 leading-relaxed text-center">
+                                <p className="text-lg font-medium text-gray-800 mb-4">"{selectedFaculty.bio}"</p>
+                                <p className="text-sm opacity-80">
+                                    At Fairway High School, {selectedFaculty.name.split(' ')[1] || selectedFaculty.name} is dedicated to fostering a supportive and challenging learning environment. 
+                                    With a focus on student success and holistic development, they play a crucial role in our community.
+                                </p>
+                            </div>
+
+                            <div className="mt-8 pt-6 border-t border-gray-50 flex justify-center">
+                                <button 
+                                    onClick={() => setSelectedFacultyId(null)}
+                                    className="bg-brand-black text-white px-8 py-3 rounded-xl font-bold hover:bg-gray-800 transition-colors shadow-lg shadow-brand-black/20"
+                                >
+                                    Close Profile
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </div>
         );
 
       case 'academics':
@@ -99,7 +187,7 @@ const SectionView: React.FC<SectionViewProps> = ({ view, onBack }) => {
                 {/* Departments */}
                 <h3 className="text-2xl font-bold font-display mt-8 mb-6 text-brand-black">Our Departments</h3>
                 <div className="grid md:grid-cols-3 gap-6">
-                    <div className="bg-indigo-50 p-6 rounded-2xl hover:bg-indigo-100 transition-colors">
+                    <div className="bg-sky-50 p-6 rounded-2xl hover:bg-sky-100 transition-colors">
                         <FlaskConical className="text-brand-accent mb-4" size={32} />
                         <h4 className="font-bold text-lg mb-2">Science Department</h4>
                         <p className="text-sm text-gray-600">Equipped with modern Physics, Chemistry, and Biology laboratories for practical learning.</p>
@@ -128,7 +216,7 @@ const SectionView: React.FC<SectionViewProps> = ({ view, onBack }) => {
 
             <div className="grid md:grid-cols-3 gap-6">
                 <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm text-center group hover:border-brand-accent transition-colors">
-                    <div className="w-12 h-12 bg-indigo-50 text-brand-accent rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                    <div className="w-12 h-12 bg-sky-50 text-brand-accent rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
                         <User size={24} />
                     </div>
                     <h3 className="font-bold text-lg mb-2">1. Register</h3>
@@ -151,7 +239,7 @@ const SectionView: React.FC<SectionViewProps> = ({ view, onBack }) => {
             </div>
 
             <div className="flex justify-center my-8">
-                <button className="bg-brand-accent text-white px-8 py-4 rounded-full font-bold flex items-center gap-3 hover:bg-indigo-600 transition-all shadow-lg shadow-brand-accent/20">
+                <button className="bg-brand-accent text-white px-8 py-4 rounded-full font-bold flex items-center gap-3 hover:bg-sky-600 transition-all shadow-lg shadow-brand-accent/20">
                     <Download size={20} /> Download Application Form (PDF)
                 </button>
             </div>
@@ -305,7 +393,7 @@ const SectionView: React.FC<SectionViewProps> = ({ view, onBack }) => {
                         <input type="text" placeholder="Your Name" className="w-full p-4 bg-gray-50 rounded-xl border-none focus:ring-2 focus:ring-brand-accent" />
                         <input type="email" placeholder="Email Address" className="w-full p-4 bg-gray-50 rounded-xl border-none focus:ring-2 focus:ring-brand-accent" />
                         <textarea placeholder="How can we help?" className="w-full p-4 bg-gray-50 rounded-xl border-none focus:ring-2 focus:ring-brand-accent h-32"></textarea>
-                        <button className="w-full bg-brand-accent text-white font-bold py-4 rounded-xl hover:bg-indigo-600 transition-colors">Send Message</button>
+                        <button className="w-full bg-brand-accent text-white font-bold py-4 rounded-xl hover:bg-sky-600 transition-colors">Send Message</button>
                     </form>
                 </div>
             </div>

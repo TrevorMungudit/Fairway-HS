@@ -1,6 +1,7 @@
 import React from 'react';
 import { ViewState } from '../types';
-import { ArrowRight, Search, Sparkles, ArrowUpRight } from 'lucide-react';
+import { BLOG_POSTS } from '../constants';
+import { ArrowRight, Search, Sparkles, ArrowUpRight, Calendar, Bell, Users } from 'lucide-react';
 
 interface HomePageProps {
   setView: (view: ViewState) => void;
@@ -28,44 +29,86 @@ const HomePage: React.FC<HomePageProps> = ({ setView, onOpenChat }) => {
       </div>
 
       {/* Bento Grid Hero */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-10 h-[400px] md:h-[500px]">
-        {/* Large Left Item */}
-        <div className="col-span-2 row-span-2 relative rounded-[2rem] overflow-hidden group cursor-pointer" onClick={() => setView('about')}>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12 auto-rows-[minmax(180px,auto)]">
+        {/* Large Hero Item - Campus */}
+        <div className="col-span-1 md:col-span-2 lg:col-span-2 row-span-2 relative rounded-[2.5rem] overflow-hidden group cursor-pointer h-[300px] md:h-auto shadow-sm hover:shadow-md transition-all" onClick={() => setView('about')}>
             <img 
                 src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1600&auto=format&fit=crop" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 alt="Campus"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex flex-col justify-end p-6">
-                <span className="bg-white/20 backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-2">Established 1998</span>
-                <h2 className="text-white text-3xl font-display font-bold leading-tight">Excellence in <br/>Kawempe-Kazo</h2>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8">
+                <span className="bg-white/20 backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-3 border border-white/10">Established 1998</span>
+                <h2 className="text-white text-3xl md:text-4xl font-display font-bold leading-tight mb-2">Excellence in <br/>Kawempe-Kazo</h2>
+                <p className="text-white/80 text-sm md:text-base line-clamp-2">Empowering the next generation of leaders through holistic education.</p>
             </div>
         </div>
 
-        {/* Top Right Item */}
-        <div className="bg-brand-gray rounded-[2rem] p-6 flex flex-col justify-between group hover:bg-brand-accent hover:text-white transition-colors cursor-pointer" onClick={() => setView('academics')}>
+        {/* Academics Item */}
+        <div className="bg-brand-gray rounded-[2.5rem] p-8 flex flex-col justify-between group hover:bg-brand-accent hover:text-white transition-colors cursor-pointer h-[200px] md:h-auto shadow-sm hover:shadow-md" onClick={() => setView('academics')}>
             <div className="flex justify-between items-start">
-                <div className="p-2 bg-white rounded-full text-brand-black group-hover:bg-white/20 group-hover:text-white transition-colors">
-                    <ArrowUpRight size={20} />
+                <div className="p-3 bg-white rounded-full text-brand-black group-hover:bg-white/20 group-hover:text-white transition-colors shadow-sm">
+                    <ArrowUpRight size={24} />
                 </div>
-                <span className="font-display font-bold text-4xl">A+</span>
+                <span className="font-display font-bold text-5xl opacity-20 group-hover:opacity-40 transition-opacity">A+</span>
             </div>
             <div>
-                <p className="text-sm font-medium opacity-70">Academics</p>
-                <p className="font-bold text-lg">Top UNEB Results</p>
+                <p className="text-sm font-bold uppercase tracking-wider opacity-60 mb-1">Academics</p>
+                <p className="font-bold text-xl leading-tight">Top UNEB Results & Curriculum</p>
             </div>
         </div>
 
-        {/* Bottom Right Item */}
-        <div className="relative rounded-[2rem] overflow-hidden group cursor-pointer" onClick={() => setView('co-curricular')}>
+        {/* Faculty Item */}
+        <div className="bg-sky-50 rounded-[2.5rem] p-8 flex flex-col justify-between group hover:bg-brand-accent hover:text-white transition-colors cursor-pointer h-[200px] md:h-auto shadow-sm hover:shadow-md" onClick={() => setView('faculty')}>
+            <div className="flex justify-between items-start">
+                <div className="p-3 bg-white rounded-full text-brand-accent group-hover:bg-white/20 group-hover:text-white transition-colors shadow-sm">
+                    <Users size={24} />
+                </div>
+            </div>
+            <div>
+                <p className="text-brand-accent/60 group-hover:text-white/60 text-sm font-bold uppercase tracking-wider mb-1 transition-colors">Our Team</p>
+                <p className="font-bold text-xl leading-tight">Meet the Faculty</p>
+            </div>
+        </div>
+
+        {/* Sports/Co-curricular Item */}
+        <div className="relative rounded-[2.5rem] overflow-hidden group cursor-pointer h-[200px] md:h-auto shadow-sm hover:shadow-md transition-all" onClick={() => setView('co-curricular')}>
              <img 
                 src="https://images.unsplash.com/photo-1526232761682-d26e03ac148e?q=80&w=800&auto=format&fit=crop" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 alt="Sports"
             />
-            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors flex items-center justify-center">
-                <div className="bg-white/20 backdrop-blur-md p-3 rounded-full text-white">
-                    <ArrowRight size={24} />
+            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors flex flex-col justify-between p-8">
+                <div className="flex justify-end">
+                    <div className="bg-white/20 backdrop-blur-md p-3 rounded-full text-white border border-white/10">
+                        <ArrowRight size={24} />
+                    </div>
+                </div>
+                <div>
+                    <p className="text-white/80 text-xs font-bold uppercase tracking-wider mb-1">Co-curricular</p>
+                    <h3 className="text-white font-bold text-xl">Sports & Talent</h3>
+                </div>
+            </div>
+        </div>
+
+        {/* News / Announcements Item (New) */}
+        <div className="col-span-1 md:col-span-1 lg:col-span-1 bg-white border border-gray-100 rounded-[2.5rem] p-6 shadow-sm hover:shadow-md transition-all overflow-hidden flex flex-col h-[200px] md:h-auto">
+            <div className="flex items-center justify-between mb-4">
+                <h3 className="font-bold text-lg flex items-center gap-2"><Bell size={18} className="text-brand-accent"/> Updates</h3>
+                <button onClick={() => setView('blog')} className="text-xs font-bold text-brand-accent hover:underline">View All</button>
+            </div>
+            <div className="flex-1 overflow-y-auto custom-scrollbar space-y-4 pr-2">
+                {BLOG_POSTS.slice(0, 3).map((post) => (
+                    <div key={post.id} className="group cursor-pointer" onClick={() => setView('blog')}>
+                        <p className="text-xs text-gray-400 font-bold mb-1 flex items-center gap-1"><Calendar size={10}/> {post.date}</p>
+                        <h4 className="font-bold text-sm text-brand-black group-hover:text-brand-accent transition-colors line-clamp-2">{post.title}</h4>
+                    </div>
+                ))}
+            </div>
+            <div className="mt-4 pt-4 border-t border-gray-50">
+                <div className="bg-brand-accent/5 rounded-xl p-3 flex items-center gap-3">
+                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                    <p className="text-xs font-medium text-brand-accent">Admissions Open for 2025</p>
                 </div>
             </div>
         </div>
@@ -94,6 +137,7 @@ const HomePage: React.FC<HomePageProps> = ({ setView, onOpenChat }) => {
             {[
                 { label: 'Admissions 2025', icon: '📝', view: 'admissions' },
                 { label: 'School Fees', icon: '💰', view: 'admissions' },
+                { label: 'Staff & Faculty', icon: '👨‍🏫', view: 'faculty' },
                 { label: 'Sports', icon: '⚽', view: 'co-curricular' },
                 { label: 'Gallery', icon: '📸', view: 'gallery' },
                 { label: 'Contact Us', icon: '📞', view: 'contact' },

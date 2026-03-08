@@ -1,4 +1,4 @@
-export type ViewState = 'home' | 'about' | 'academics' | 'admissions' | 'co-curricular' | 'gallery' | 'blog' | 'contact';
+export type ViewState = 'home' | 'about' | 'academics' | 'admissions' | 'co-curricular' | 'gallery' | 'blog' | 'contact' | 'faculty';
 
 export interface BlogPost {
   id: number;
@@ -12,6 +12,14 @@ export interface GalleryItem {
   id: number;
   url: string;
   caption: string;
+}
+
+export interface FacultyMember {
+  id: number;
+  name: string;
+  role: string;
+  bio: string;
+  image: string;
 }
 
 export interface NavItem {
