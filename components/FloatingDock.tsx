@@ -31,7 +31,7 @@ const FloatingDock: React.FC<FloatingDockProps> = ({ currentView, setView }) => 
   );
 
   return (
-    <div className="absolute bottom-8 md:bottom-10 left-1/2 transform -translate-x-1/2 z-[100] w-max max-w-[90vw]">
+    <div className="absolute bottom-4 md:bottom-10 left-1/2 transform -translate-x-1/2 z-[100] w-max max-w-[90vw]">
       <div className="flex items-center gap-2 bg-brand-black/95 backdrop-blur-xl p-3 rounded-full shadow-2xl border border-white/20 ring-1 ring-black/5">
         {mainNavItems.map((item) => (
           <button

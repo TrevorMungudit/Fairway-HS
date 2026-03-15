@@ -10,7 +10,7 @@ const App: React.FC = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
 
   return (
-    <div className="w-full h-screen bg-white flex items-center justify-center p-0 md:p-4 lg:p-8">
+    <div className="w-full h-[100dvh] bg-white flex items-center justify-center p-0 md:p-4 lg:p-8">
         {/* Main App Container - Mobile App Style */}
         <div className="w-full max-w-[1200px] h-full md:h-[90vh] bg-white md:rounded-[3rem] shadow-2xl flex flex-col overflow-hidden relative">
             
