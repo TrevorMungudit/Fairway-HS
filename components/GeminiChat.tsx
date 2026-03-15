@@ -110,8 +110,15 @@ const GeminiChat: React.FC<GeminiChatProps> = ({ isOpen, setIsOpen }) => {
           {isTyping && (
             <div className="flex justify-start">
               <div className="bg-brand-gray rounded-[1.5rem] rounded-bl-sm px-5 py-3 flex items-center space-x-2">
-                <Loader2 className="animate-spin text-brand-accent" size={16} />
-                <span className="text-xs text-gray-500">Thinking...</span>
+                <Sparkles className="animate-pulse text-brand-accent" size={16} />
+                <span className="text-xs text-gray-500 font-medium flex items-center">
+                  Thinking
+                  <span className="flex space-x-1 ml-1">
+                    <span className="w-1 h-1 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
+                    <span className="w-1 h-1 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
+                    <span className="w-1 h-1 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
+                  </span>
+                </span>
               </div>
             </div>
           )}
@@ -120,14 +127,15 @@ const GeminiChat: React.FC<GeminiChatProps> = ({ isOpen, setIsOpen }) => {
 
         {/* Input Area */}
         <div className="p-4 bg-white border-t border-gray-100">
-          <div className="flex items-center space-x-2 bg-brand-gray rounded-full p-1 pl-4">
+          <div className={`flex items-center space-x-2 bg-brand-gray rounded-full p-1 pl-4 transition-all duration-300 ${isTyping ? 'ring-2 ring-brand-accent/30 animate-pulse' : ''}`}>
             <input
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={handleKeyPress}
-              placeholder="Ask anything..."
-              className="flex-1 bg-transparent text-brand-black text-sm focus:outline-none"
+              placeholder={isTyping ? "AI is typing..." : "Ask anything..."}
+              disabled={isTyping}
+              className="flex-1 bg-transparent text-brand-black text-sm focus:outline-none disabled:opacity-50"
             />
             <button
               onClick={handleSend}
